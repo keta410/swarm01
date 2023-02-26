@@ -1,17 +1,17 @@
 version: '3.0'
 services:
-  nc:
+  next_cloud:
     image: nextcloud:apache
     environment:
       - POSTGRES_HOST=db
-      - POSTGRES_PASSWORD=nextcloud
+      - POSTGRES_PASSWORD=k123456
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=nextcloud
     ports:
       - 100:80
     restart: always
     volumes:
-      - nc_data:/var/www/html
+      - nextcloud_data:/var/www/html
   db:
     image: postgres:alpine
     environment:
@@ -25,4 +25,4 @@ services:
       - 5432
 volumes:
   db_data:
-  nc_data:
+  nextcloud_data:
