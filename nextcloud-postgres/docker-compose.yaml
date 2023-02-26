@@ -15,7 +15,7 @@ services:
   db:
     image: postgres:alpine
     environment:
-      - POSTGRES_PASSWORD=k654321
+      - POSTGRES_PASSWORD=k1163104620054
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=nextcloud
     restart: always
