@@ -1,6 +1,6 @@
 version: '3.0'
 services:
-  next_cloud:
+  nc:
     image: nextcloud:apache
     environment:
       - POSTGRES_HOST=db
@@ -25,4 +25,4 @@ services:
       - 5432
 volumes:
   db_data:
-  next_cloud_data:
+  nc_data:
