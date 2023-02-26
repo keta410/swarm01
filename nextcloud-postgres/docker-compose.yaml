@@ -8,7 +8,7 @@ services:
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=nextcloud
     ports:
-      - 102:80
+      - 80:80
     restart: always
     volumes:
       - nc_data:/var/www/html
@@ -20,10 +20,9 @@ services:
       - POSTGRES_USER=nextcloud
     restart: always
     volumes:
-      - db_data:/var/lib/postgressql/data
+      - db_data:/var/lib/postgresql/data
     expose:
       - 5432
 volumes:
   db_data:
   nc_data:
-      
