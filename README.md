@@ -3,9 +3,9 @@
 **MY URL**=> https://spcn22wp-mysql.xops.ipv9.me
 
 **Ref** :
-- App[wordpress-mysql] , I want deploy on portainer
+- App [wordpress-mysql] , I want deploy on portainer
 
-  App[wordpress-mysql] ที่ต้องการ deploy บน portainer
+  App [wordpress-mysql] ที่ต้องการ deploy บน portainer
 >(https://github.com/docker/awesome-compose/tree/master/wordpress-mysql)
 
 
@@ -13,7 +13,18 @@
 
     ตัวอย่าง code เกี่ยวกับ traefik
 >(https://github.com/pitimon/dockerswarm-inhoure/blob/main/ep04-hello-world-revProxy/hello-world-https.yml) 
+
 >(https://doc.traefik.io/traefik/user-guides/docker-compose/acme-http/)
+
+Contents swarm01 (สารบัญเนื้อหา swarm01)
+-----------------
+Title (ชื่อเรื่อง)  |
+----- | 
+[Prepare Device ((personal computer, notebook)](https://github.com/keta410/swarm01#prepare-device-personal-computer-notebook)|เตรียมพร้อมอุปกรณ์ (คอมพิวเตอร์, โน๊ตบุ๊คส่วนตัว)| 
+[Step 1 Create Folder and File for APP](https://github.com/keta410/swarm01#step-1-create-folder-and-file-for-app)|ขั้นตอนที่ 1 สร้าง Folder และ File สำหรับ APP|
+[Step 2 Deploy on Portainer(.xops.ipv9.me)](https://github.com/keta410/swarm01#step-2-deploy-on-portainerxopsipv9me)|ขั้นตอนที่ 2 การ Deploy ขึ้นบน Portainer(.xops.ipv9.me)|
+[Expected Result](https://github.com/keta410/swarm01#expected-result)|ผลลัพธ์ที่คาดว่าจะได้รับ|
+[Working Principle in docker-compose]()|หลักการทำงานใน docker-compose|
 ______________________________________________________
 ## **Prepare Device** (personal computer, notebook)
 เตรียมพร้อมอุปกรณ์ (คอมพิวเตอร์, โน๊ตบุ๊คส่วนตัว)
@@ -22,14 +33,20 @@ ______________________________________________________
 
     สร้าง **VM** บน proxmox จากนั้นตั้งค่า timezone เป็นต้น
 
+    <ins>Form command</ins> :
+
+    ```linux
+    timedatectl set-timezone Asia/Bangkok   
+    ```
+
 2. Check the **IP address** of **VM** created (I created a VM named : keta-Docker-115) and copy the IP address.
 
     ตรวจสอบ **IP address** จาก VM ที่สร้าง (ในที่นี้สร้าง **VM** ชื่อ : keta-Docker-115)
 
     <ins>Form command</ins> :
-    ```
-    ip a        //check ip address
-                //เช็ค ip address
+    
+    ```linux
+    ip a
     ```
 3. Click in the bottom-left cornor of the window named [**Open Remote Window**] and this will appear
 
@@ -62,7 +79,7 @@ ______________________________________________________
         การติตดั้ง Docker engine บน ubutu
 
      <ins>Form command</ins> :
-    ```
+    ```linux
     apt update ; apt upgrade -y
     apt-get install \
     ca-certificates \
@@ -70,16 +87,16 @@ ______________________________________________________
     gnupg \
     lsb-release -y
     ```
-    ```
+    ```linux
     mkdir -m 0755 -p /etc/apt/keyrings
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     ```
-    ```
+    ```linux
     echo \
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" |  tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
-    ```
+    ```linux
     apt-get update
     apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
     ```    
@@ -94,21 +111,20 @@ ______________________________________________________
 
 7. In No.6, All clones, change hostname, set timezone and remove machine-id from master machine. Install wakatime extension and ssh remote on all clone machine 
 
-    จากข้อ 6. ตัวที่ clone ทั้งหมด ให้ทำการเปลี่ยนชื่อ hostname, ตั้งค่า timezone และลบ machine-id จากเครื่องที่เป็น master ออก จากนั้น
-ติดตั้ง Extensions ของ wakatime และ ssh remote ลงบนเครื่องที่ clone ทุกตัว 
+    จากข้อ 6. ตัวที่ clone ทั้งหมด ให้ทำการเปลี่ยนชื่อ hostname, ตั้งค่า timezone และลบ machine-id จากเครื่องที่เป็น master ออก จากนั้นติดตั้ง Extensions ของ wakatime และ ssh remote ลงบนเครื่องที่ clone ทุกตัว 
 
-* Change hostname and timezone
+* Change *hostname* and *timezone*
     
-    เปลี่ยนชื่อ hostname และ timezone 
-    ```
+    เปลี่ยนชื่อ *hostname* และ *timezone* 
+    ```linux
     sudo -i
     hostnamectl set-hostname [set name]
     timedatectl set-timezone Asia/Bangkok
     ```
-* Edit machine-id in clone
+* Edit *machine-id* in clone
     
-    แก้ไข machine-id ในตัว clone 
-    ```
+    แก้ไข *machine-id* ในตัว clone 
+    ```linux
     cp /dev/null /etc/machine-id
     rm /var/lib/dbus/machine-id
     ln -s /etc/machine-id /var/lib/dbus/machine-id
@@ -161,38 +177,45 @@ ______________________________________________________
     
    Code สำหรับ APP  
 
-    3.1 ```docker-compose.yml```  
+<details><summary>CLICK SHOW CODE</summary>
+<p>
+
 ```docker 
 version: '3.8'      #Version Docker
 services:
     db:         #Data
-        image: mariadb:10.6.4-focal     #Mariadb version used (version ของ mariadb ที่ใช้)
+        image: mariadb:10.6.4-focal     
+        #Mariadb version used (version ของ mariadb ที่ใช้)
         command: '--default-authentication-plugin=mysql_native_password'
         volumes:
-            - db_data:/vat/lib/mysql    #Set path to collect data in db_data (ตั้งค่าเส้นทางในการเก็บข้อมูลมาใน db_data)
+            - db_data:/vat/lib/mysql    
+            #Set path to collect data in db_data (ตั้งค่าเส้นทางในการเก็บข้อมูลมาใน db_data)
         restart: always
-        networks:
+        networks:       #Network, db used (Network ที่ db ใช้)
             - wb
                         
-        environment:    #Environment of mariadb (ทรัพยากรของ mariadb)
+        environment:    
+        #Environment of mariadb (ทรัพยากรของ mariadb)
             - MYSQL_ROOT_PASSWORD=somewordpress
             - MYSQL_(config..)=wordpress
             .
             .
-            #Config about this => DATABASE,USER,PASSWORD (กำหนดเกี่ยวกับ => DATABASE,USER,PASSWORD)
+        #Config about this => DATABASE,USER,PASSWORD (กำหนดเกี่ยวกับ => DATABASE,USER,PASSWORD)
             
         expose:
             - 3306
             - 33060
 
     wordpress:      #App
-        image: wordpress:latest     #Wordpress version used (version ของ wordpress ที่ใช้)
+        image: wordpress:latest     
+        #Wordpress version used (version ของ wordpress ที่ใช้)
         restart: always 
         networks:       #Network, wordpress used (Network ที่ wordpress ใช้)
             - wp
             - webproxy
 
-        environment:    #Environment of wordpress (ทรัพยากรของ wordpress)
+        environment:    
+        #Environment of wordpress (ทรัพยากรของ wordpress)
             - WORDPRESS_DB_HOST=db
             - WORDPRESS_DB(config..)=wordpress
             .
@@ -204,14 +227,22 @@ services:
                             
             labels:     #Set label for app by connecting to Traefik (กำหนด label สำหรับ app โดยเชื่อมต่อกับ Traefik)
                         
-              - traefik.docker.network=webproxy     #Name network of Traefik = webproxy (ชื่อ netwrok ของ Traefik = webproxy)
-              - traefik.enable=true                 #Set status of Traefik (ตั้งค่าสถานะของ Traefik)
-              - traefik.constraint-label=webproxy   #Define the name of Traefik to run(กำหนดชื่อ treafik ที่ต้องการให้ทำงาน)
-              - traefik.http.routers.${APPNAME}-https.entrypoints=websecure         #Set port to connect with a request sent (กำหนด port ในการเชื่อมต่อมีคำขอส่งมา)
-              - traefik.http.routers.${APPNAME}-https.rule=Host("${APPNAME}.xops.ipv9.me")  #Set name domain for con(ตั้งค่าชื่อ domain การเข้าถึง)
-              - traefik.http.routers.${APPNAME}-https.tls.certresolver=default      #Create URL certificate (สร้างใบรับรอง URL) 
-              - traefik.http.services.${APPNAME}.loadbalancer.server.port=80    #Set port in the request(ตั้งค่า port ในการร้องขอ)
-              - traefik.http.routers.${APPNAME}-https.tls=true                #Set TSL to work (เปิดใช้งาน TSL)     
+              - traefik.docker.network=webproxy     
+            #Name network of Traefik = webproxy (ชื่อ netwrok ของ Traefik = webproxy)
+              - traefik.enable=true                 
+            #Set status of Traefik (ตั้งค่าสถานะของ Traefik)
+              - traefik.constraint-label=webproxy   
+            #Define the name of Traefik to run(กำหนดชื่อ treafik ที่ต้องการให้ทำงาน)
+              - traefik.http.routers.${APPNAME}-https.entrypoints=websecure         
+            #Set port to connect with a request sent (กำหนด port ในการเชื่อมต่อมีคำขอส่งมา)            
+              - traefik.http.routers.${APPNAME}-https.rule=Host("${APPNAME}.xops.ipv9.me")  
+            #Set name domain for con(ตั้งค่าชื่อ domain การเข้าถึง)
+              - traefik.http.routers.${APPNAME}-https.tls.certresolver=default      
+            #Create URL certificate (สร้างใบรับรอง URL) 
+              - traefik.http.services.${APPNAME}.loadbalancer.server.port=80    
+            #Set port in the request(ตั้งค่า port ในการร้องขอ)
+              - traefik.http.routers.${APPNAME}-https.tls=true                
+            #Set TSL to work (เปิดใช้งาน TSL)     
 
         #It's variable (เป็นตัวแปร) 
         #Config APPNAME=spcn22wp-mysql (กำหนดค่า APPNAME=spcn22wp-mysql)
@@ -219,16 +250,20 @@ services:
 volumes:  
     db_data:
 
-networks:       #All network, can used (network ทั้งหมดที่สามารถใช้ได้)
+networks:       #All network, can used
+                #network ทั้งหมดที่สามารถใช้ได้
     
-    wb:                 #network that allows communication between db and wordpress (network ที่สร้างให้สามารถข้อมูลสื่อสารระหว่าง db กับ wordpress ได้)
+    wb:                 #network that allows communication between db and wordpress
+                        #network ที่สร้างให้สามารถข้อมูลสื่อสารระหว่าง db กับ wordpress ได้
       driver: overlay
 
     webproxy:              
-      external: true        #config this app can used webproxy network (กำหนดให้แอพนี้สามารถใช้ webproxy network ได้)
+      external: true        #config this app can used webproxy network 
+                            #กำหนดให้แอพนี้สามารถใช้ webproxy network ได้
 ```
 
-\-> 
+</p>
+</details>
 ______________________________________________________
 
 ### **Step 2** Deploy on Portainer(.xops.ipv9.me)
@@ -265,3 +300,34 @@ ______________________________________________________
     เว็บเบราว์เซอร์ที่เรากำหนดให้สามารถเข้าถึง WordPress ได้
 
 ![access-web-wp-mysql](https://user-images.githubusercontent.com/104758471/222714145-31addf7d-4858-495d-934a-212e289700e1.jpg)
+
+______________________________________________________
+
+### **Working Principle in docker-compose**
+หลักการทำงานใน docker-compose
+______________________________________________________
+    
+Under the ```docker-compose.yml``` of the app [**wordpress-mysql**] is specified :
+
+ภายใต้การทำงานของ ```docker-compose.yml``` ของ app [**wordpress-mysql**] มีการระบุ
+
+- Version of the compose file directly, it can specify any version that is supported by the app I choose, in this case I choose 3.8
+
+    version ของ compose file โดยตรงนี้ เราสามารถระบุเป็น version ที่เท่าไหร่ก็ได้ที่สนับสนุนกับ app ที่เราเลือก ในที่นี้เลือก 3.8
+
+- Service spedifies the container to use. There are **db** and **wordpress**. In the container, 
+consists of image, command, volumes, restart, networks, environment, expose and deploy etc. None of these require all containers, because it depends on what we want to do.
+
+    service ใช้ระบุ container ที่จะใช้ ในที่นี้มี db และ wordpress โดยภายใน container เรานี้ประกอบไปด้วย image, command, volumes, restart, networks, environment, expose และ deploy เป็นต้น ทั้งหมดที่กล่าวมาในทุก container ไม่จำเป็นต้องใช้ทั้งหมดเพราะขึ้นอยู่กับวัตถุประสงค์ว่าเราต้องการทำอะไรบ้าง 
+
+- Volumes are used to create storage. This is different from the volumes in the service because that section is linked to the individual volumes of the created container.
+
+    volumes ใช้สร้างที่เก็บข้อมูล ซึ่งแตกต่างจาก volumes ที่อยู่ใน service เพราะตรงในส่วนนั้นจะเป็นการเชื่อม volumes แต่ละตัว container ที่สร้างไว้ 
+
+- Networks are connections of existing or self-contained, networks communicating with compose files.
+
+    networks เป็นการเชื่อมต่อกันของ network ที่มีหรือสร้างเอง สื่อสารกับ compose file
+
+In summary, when command ```docker compose up -d``` or Click right the ```docker-compose.yml``` file, then select [**Compose Up**]. this will cause the container to be created, the network will record the data specified for each on the container, the port that is specified or a domain name that uses traefik to help manage as we define.
+
+สรุปเมื่อสั่ง ```docker compose up -d``` หรือคลิกขวาที่ไฟล์ ```docker-compose.yml``` เลือก [**Compose Up**] ขึ้นไปจะทำให้มีการสร้างตัว container ,network มีการบันทึกข้อมูลตามที่กำหนดไว้ในแต่ละตัวบน container, port ที่ถูกระบุใช้งาน หรือชื่อโดเมนที่มีการใช้ traefik ช่วยในการจัดการตามที่เรากำหนด
