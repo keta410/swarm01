@@ -5,15 +5,13 @@
 **Wakatime Project: swarm01**=> https://wakatime.com/@spcn22/projects/gtauhbzafe
 
 **Ref** :
-- App [wordpress-mysql] , I want deploy on portainer
+- App [*wordpress-mysql*] , I want deploy on portainer (App ที่ต้องการ deploy บน portainer)
 
-  App [wordpress-mysql] ที่ต้องการ deploy บน portainer
 >(https://github.com/docker/awesome-compose/tree/master/wordpress-mysql)
 
 
-* The Example for code about traefik
+* The Example for code about traefik (ตัวอย่าง code เกี่ยวกับ traefik)
 
-    ตัวอย่าง code เกี่ยวกับ traefik
 >(https://github.com/pitimon/dockerswarm-inhoure/blob/main/ep04-hello-world-revProxy/hello-world-https.yml) 
 
 >(https://doc.traefik.io/traefik/user-guides/docker-compose/acme-http/)
@@ -33,9 +31,8 @@ ______________________________________________________
 ## **Prepare Device** (personal computer, notebook)
 เตรียมพร้อมอุปกรณ์ (คอมพิวเตอร์, โน๊ตบุ๊คส่วนตัว)
 ______________________________________________________
-1. Create **VM** on proxmox then set timezone etc.
-
-    สร้าง **VM** บน proxmox จากนั้นตั้งค่า timezone เป็นต้น
+1. Create **VM** on proxmox then set timezone etc. 
+(สร้าง **VM** บน proxmox จากนั้นตั้งค่า timezone เป็นต้น)
 
     <ins>Form command</ins> :
 
@@ -45,7 +42,7 @@ ______________________________________________________
 
 2. Check the **IP address** of **VM** created (I created a VM named : keta-Docker-115) and copy the IP address.
 
-    ตรวจสอบ **IP address** จาก VM ที่สร้าง (ในที่นี้สร้าง **VM** ชื่อ : keta-Docker-115)
+    (ตรวจสอบ **IP address** จาก VM ที่สร้าง (ในที่นี้สร้าง **VM** ชื่อ : keta-Docker-115))
 
     <ins>Form command</ins> :
     
@@ -54,13 +51,13 @@ ______________________________________________________
     ```
 3. Click in the bottom-left cornor of the window named [**Open Remote Window**] and this will appear
 
-    คลิกปุ่มด้านล่างซ้ายสุดของหน้าต่าง ชื่อว่า [**Open Remote Window**] และจะปรากฏสิ่งนี้
+    (คลิกปุ่มด้านล่างซ้ายสุดของหน้าต่าง ชื่อว่า [**Open Remote Window**] และจะปรากฏสิ่งนี้)
 
     ![config-host1](https://user-images.githubusercontent.com/104758471/222904598-4065cc30-cc6e-457d-84c5-b3bd852f0bfc.jpg)
 
 4. Click [**Connect to Host...**] > [**Configure SSH Hosts..**] > [**C:\Users\asus\.ssh\config**] then configure as follows 
 
-    คลิก [**Connect to Host...**] > [**Configure SSH Hosts..**] > [**C:\Users\asus\.ssh\config**] จากนั้นกำหนดค่าตามนี้
+    (คลิก [**Connect to Host...**] > [**Configure SSH Hosts..**] > [**C:\Users\asus\.ssh\config**] จากนั้นกำหนดค่าตามนี้)
 
 <ins>Form config</ins>:
 
@@ -73,14 +70,13 @@ ______________________________________________________
                                             //กำหนดชื่อบัญชีจาก proxmox
     
     ```
-![host-config](https://user-images.githubusercontent.com/104758471/222712916-22567d26-bcb9-4060-9bd8-410b1b0f3192.jpg)
 
 5. Install **Docker, wakatime** and **ssh remote** at the computer used on VS Code then remote own VM from proxmox with the IP address, I coppied.
     
-    ติดตั้ง **Docker, wakatime** และ **ssh remote** ที่เครื่องคอมพิวเตอร์ที่ใช้งานผ่าน VS Code จากนั้น remote VM ของตัวเองจาก proxmox ด้วย IP adress ที่ copy มา
+    (ติดตั้ง **Docker, wakatime** และ **ssh remote** ที่เครื่องคอมพิวเตอร์ที่ใช้งานผ่าน VS Code จากนั้น remote VM ของตัวเองจาก proxmox ด้วย IP adress ที่ copy มา)
 
     * Docker engine install on ubutu
-        การติตดั้ง Docker engine บน ubutu
+        (การติตดั้ง Docker engine บน ubutu)
 
      <ins>Form command</ins> :
     ```linux
@@ -107,19 +103,17 @@ ______________________________________________________
 
     When finished in the VM, right click to [**Convert to template**] and clone it out.
 
-    เมื่อลงใน VM เสร็จแล้ว ให้ทำเป็น Template โดยคลิกขวาเลือก [**Convert to template**] แล้ว clone ออกมา
+    (เมื่อลงใน VM เสร็จแล้ว ให้ทำเป็น Template โดยคลิกขวาเลือก [**Convert to template**] แล้ว clone ออกมา)
 
 6. Set work specification that has already been defined, All three clones were named : ket-manager-190, ket-worker1-191, ket-worker2-192
 
-    กำหนดสเปคการทำงานที่กำหนดไว้ จากนั้นตั้งชื่อตัวที่ clone ทั้งหมด 3 เครื่อง ได้แก่ ket-manager-190, ket-worker1-191, ket-worker2-192
+    (กำหนดสเปคการทำงานที่กำหนดไว้ จากนั้นตั้งชื่อตัวที่ clone ทั้งหมด 3 เครื่อง ได้แก่ ket-manager-190, ket-worker1-191, ket-worker2-192)
 
 7. In No.6, All clones, change hostname, set timezone and remove machine-id from master machine. Install wakatime extension and ssh remote on all clone machine 
 
-    จากข้อ 6. ตัวที่ clone ทั้งหมด ให้ทำการเปลี่ยนชื่อ hostname, ตั้งค่า timezone และลบ machine-id จากเครื่องที่เป็น master ออก จากนั้นติดตั้ง Extensions ของ wakatime และ ssh remote ลงบนเครื่องที่ clone ทุกตัว 
+    (จากข้อ 6. ตัวที่ clone ทั้งหมด ให้ทำการเปลี่ยนชื่อ hostname, ตั้งค่า timezone และลบ machine-id จากเครื่องที่เป็น master ออก จากนั้นติดตั้ง Extensions ของ wakatime และ ssh remote ลงบนเครื่องที่ clone ทุกตัว) 
 
-* Change *hostname* and *timezone*
-    
-    เปลี่ยนชื่อ *hostname* และ *timezone* 
+* Change *hostname* and *timezone* (เปลี่ยนชื่อ *hostname* และ *timezone*) 
     ```linux
     sudo -i
     hostnamectl set-hostname [set name]
@@ -164,9 +158,7 @@ ______________________________________________________
 1. Create Folder Name's => **wordpress-mysql**
     
     สร้าง Folder ชื่อ => **wordpress-mysql**
-2. Create File in folder => *wordpress-mysql*
-
-    สร้าง File ใน folder ชื่อ => *wordpress-mysql* 
+2. Create File in folder => *wordpress-mysql* (สร้าง File ใน folder ชื่อ => *wordpress-mysql*) 
 
     <ins>Stucture of *wordpress-mysql* folder</ins> :
     
@@ -177,9 +169,7 @@ ______________________________________________________
 
     ```
 
-3. Code for APP
-    
-   Code สำหรับ APP  
+3. Code for APP (Code สำหรับ APP)  
 
 <details><summary>CLICK SHOW CODE (docker-compose.yml)</summary>
 <p>
@@ -316,31 +306,31 @@ ______________________________________________________
 หลักการทำงานใน docker-compose
 ______________________________________________________
     
-<ins>Under the ```docker-compose.yml``` of the app [**wordpress-mysql**] is specified</ins> :
+**<ins>Under the ```docker-compose.yml``` of the app [*wordpress-mysql*] is specified</ins>** :
 
-ภายใต้การทำงานของ ```docker-compose.yml``` ของ app [**wordpress-mysql**] มีการระบุ
+ภายใต้การทำงานของ ```docker-compose.yml``` ของ app [*wordpress-mysql*] มีการระบุ
 
-- Version of the compose file directly, it can specify any version that is supported by the app I choose, in this case I choose 3.8
+- **Version** of the compose file directly, it can specify any version that is supported by the app I choose, in this case I choose 3.8
 
-    version ของ compose file โดยตรงนี้ เราสามารถระบุเป็น version ที่เท่าไหร่ก็ได้ที่สนับสนุนกับ app ที่เราเลือก ในที่นี้เลือก 3.8
+    (**Version** ของ compose file โดยตรงนี้ เราสามารถระบุเป็น version ที่เท่าไหร่ก็ได้ที่สนับสนุนกับ app ที่เราเลือก ในที่นี้เลือก 3.8)
 
-- Service spedifies the container to use. There are **db** and **wordpress**. In the container, 
+- **Service** spedifies the container to use. There are *db* and *wordpress*. In the container, 
 consists of image, command, volumes, restart, networks, environment, expose and deploy etc. None of these require all containers, because it depends on what we want to do.
 
-    service ใช้ระบุ container ที่จะใช้ ในที่นี้มี db และ wordpress โดยภายใน container เรานี้ประกอบไปด้วย image, command, volumes, restart, networks, environment, expose และ deploy เป็นต้น ทั้งหมดที่กล่าวมาในทุก container ไม่จำเป็นต้องใช้ทั้งหมดเพราะขึ้นอยู่กับวัตถุประสงค์ว่าเราต้องการทำอะไรบ้าง 
+    (**Service** ใช้ระบุ container ที่จะใช้ ในที่นี้มี *db* และ *wordpress* โดยภายใน container เรานี้ประกอบไปด้วย image, command, volumes, restart, networks, environment, expose และ deploy เป็นต้น ทั้งหมดที่กล่าวมาในทุก container ไม่จำเป็นต้องใช้ทั้งหมดเพราะขึ้นอยู่กับวัตถุประสงค์ว่าเราต้องการทำอะไรบ้าง) 
 
-- Volumes are used to create storage. This is different from the volumes in the service because that section is linked to the individual volumes of the created container.
+- **Volumes** are used to create storage. This is different from the volumes in the service because that section is linked to the individual volumes of the created container.
 
-    volumes ใช้สร้างที่เก็บข้อมูล ซึ่งแตกต่างจาก volumes ที่อยู่ใน service เพราะตรงในส่วนนั้นจะเป็นการเชื่อม volumes แต่ละตัว container ที่สร้างไว้ 
+    (**Volumes** ใช้สร้างที่เก็บข้อมูล ซึ่งแตกต่างจาก volumes ที่อยู่ใน service เพราะตรงในส่วนนั้นจะเป็นการเชื่อม volumes แต่ละตัว container ที่สร้างไว้) 
 
-- Networks are connections of existing or self-contained, networks communicating with compose files.
+- **Networks** are connections of existing or self-contained, networks communicating with compose files.
 
-    networks เป็นการเชื่อมต่อกันของ network ที่มีหรือสร้างเอง สื่อสารกับ compose file
+    (**Networks** เป็นการเชื่อมต่อกันของ network ที่มีหรือสร้างเอง สื่อสารกับ compose file)
 
-<ins>Summary</ins>
+**<ins>Summary</ins>**
 
 When command ```docker compose up -d``` or Click right the ```docker-compose.yml``` file, then select [**Compose Up**]. this will cause the container to be created, the network will record the data specified for each on the container, the port that is specified or a domain name that uses traefik to help manage as we define.
 
-<ins>สรุป</ins>
+(**<ins>สรุป</ins>**
 
-เมื่อสั่ง ```docker compose up -d``` หรือคลิกขวาที่ไฟล์ ```docker-compose.yml``` เลือก [**Compose Up**] ขึ้นไปจะทำให้มีการสร้างตัว container ,network มีการบันทึกข้อมูลตามที่กำหนดไว้ในแต่ละตัวบน container, port ที่ถูกระบุใช้งาน หรือชื่อโดเมนที่มีการใช้ traefik ช่วยในการจัดการตามที่เรากำหนด
+เมื่อสั่ง ```docker compose up -d``` หรือคลิกขวาที่ไฟล์ ```docker-compose.yml``` เลือก [**Compose Up**] ขึ้นไปจะทำให้มีการสร้างตัว container ,network มีการบันทึกข้อมูลตามที่กำหนดไว้ในแต่ละตัวบน container, port ที่ถูกระบุใช้งาน หรือชื่อโดเมนที่มีการใช้ traefik ช่วยในการจัดการตามที่เรากำหนด)
