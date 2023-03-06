@@ -2,6 +2,8 @@
 
 **MY URL**=> https://spcn22wp-mysql.xops.ipv9.me
 
+**Wakatime Project: swarm01**=> https://wakatime.com/@spcn22/projects/gtauhbzafe
+
 **Ref** :
 - App [wordpress-mysql] , I want deploy on portainer
 
@@ -271,7 +273,12 @@ ______________________________________________________
 ______________________________________________________
 
 1. Open website =>(https://portainer.ipv9.me/#!/auth) and Login with GitHub account
+
+    เปิด website =>(https://portainer.ipv9.me/#!/auth) และ Login with GitHub account
+
 2. Press [**Add Stack**] and click [**Web editor**]
+
+    กดปุ่ม  [**Add Stack**] และคลิก [**Web editor**]
 
 * Add Stack
 ![up-portainer-fillText jpg ](https://user-images.githubusercontent.com/104758471/222903882-8aa8a92d-63bc-4dc4-8615-0070078cd863.jpg)
