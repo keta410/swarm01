@@ -18,15 +18,17 @@
 
 >(https://doc.traefik.io/traefik/user-guides/docker-compose/acme-http/)
 
+______________________________________________________
+
 Contents swarm01 (สารบัญเนื้อหา swarm01)
 -----------------
-Title (ชื่อเรื่อง)  |
------ | 
-[Prepare Device ((personal computer, notebook)](https://github.com/keta410/swarm01#prepare-device-personal-computer-notebook)|เตรียมพร้อมอุปกรณ์ (คอมพิวเตอร์, โน๊ตบุ๊คส่วนตัว)| 
-[Step 1 Create Folder and File for APP](https://github.com/keta410/swarm01#step-1-create-folder-and-file-for-app)|ขั้นตอนที่ 1 สร้าง Folder และ File สำหรับ APP|
-[Step 2 Deploy on Portainer(.xops.ipv9.me)](https://github.com/keta410/swarm01#step-2-deploy-on-portainerxopsipv9me)|ขั้นตอนที่ 2 การ Deploy ขึ้นบน Portainer(.xops.ipv9.me)|
-[Expected Result](https://github.com/keta410/swarm01#expected-result)|ผลลัพธ์ที่คาดว่าจะได้รับ|
-[Working Principle in docker-compose]()|หลักการทำงานใน docker-compose|
+No. |English Title (ชื่อเรื่องภาษาอังกฤษ)  | Thai Title (ชื่อเรื่องภาษาไทย) |
+----- |----- | ----- |
+1)|[Prepare Device ((personal computer, notebook)](https://github.com/keta410/swarm01#prepare-device-personal-computer-notebook)|  เตรียมพร้อมอุปกรณ์ (คอมพิวเตอร์, โน๊ตบุ๊คส่วนตัว)| 
+2)|[Step 1 Create Folder and File for APP](https://github.com/keta410/swarm01#step-1-create-folder-and-file-for-app)|ขั้นตอนที่ 1 สร้าง Folder และ File สำหรับ APP|
+3)|[Step 2 Deploy on Portainer(.xops.ipv9.me)](https://github.com/keta410/swarm01#step-2-deploy-on-portainerxopsipv9me)|ขั้นตอนที่ 2 การ Deploy ขึ้นบน Portainer(.xops.ipv9.me)|
+4)|[Expected Result](https://github.com/keta410/swarm01#expected-result)|ผลลัพธ์ที่คาดว่าจะได้รับ|
+5)|[Working Principle in docker-compose](https://github.com/keta410/swarm01#working-principle-in-docker-compose)|หลักการทำงานใน docker-compose|
 ______________________________________________________
 ## **Prepare Device** (personal computer, notebook)
 เตรียมพร้อมอุปกรณ์ (คอมพิวเตอร์, โน๊ตบุ๊คส่วนตัว)
@@ -179,7 +181,7 @@ ______________________________________________________
     
    Code สำหรับ APP  
 
-<details><summary>CLICK SHOW CODE</summary>
+<details><summary>CLICK SHOW CODE (docker-compose.yml)</summary>
 <p>
 
 ```docker 
@@ -314,7 +316,7 @@ ______________________________________________________
 หลักการทำงานใน docker-compose
 ______________________________________________________
     
-Under the ```docker-compose.yml``` of the app [**wordpress-mysql**] is specified :
+<ins>Under the ```docker-compose.yml``` of the app [**wordpress-mysql**] is specified</ins> :
 
 ภายใต้การทำงานของ ```docker-compose.yml``` ของ app [**wordpress-mysql**] มีการระบุ
 
@@ -335,6 +337,10 @@ consists of image, command, volumes, restart, networks, environment, expose and 
 
     networks เป็นการเชื่อมต่อกันของ network ที่มีหรือสร้างเอง สื่อสารกับ compose file
 
-In summary, when command ```docker compose up -d``` or Click right the ```docker-compose.yml``` file, then select [**Compose Up**]. this will cause the container to be created, the network will record the data specified for each on the container, the port that is specified or a domain name that uses traefik to help manage as we define.
+<ins>Summary</ins>
 
-สรุปเมื่อสั่ง ```docker compose up -d``` หรือคลิกขวาที่ไฟล์ ```docker-compose.yml``` เลือก [**Compose Up**] ขึ้นไปจะทำให้มีการสร้างตัว container ,network มีการบันทึกข้อมูลตามที่กำหนดไว้ในแต่ละตัวบน container, port ที่ถูกระบุใช้งาน หรือชื่อโดเมนที่มีการใช้ traefik ช่วยในการจัดการตามที่เรากำหนด
+When command ```docker compose up -d``` or Click right the ```docker-compose.yml``` file, then select [**Compose Up**]. this will cause the container to be created, the network will record the data specified for each on the container, the port that is specified or a domain name that uses traefik to help manage as we define.
+
+<ins>สรุป</ins>
+
+เมื่อสั่ง ```docker compose up -d``` หรือคลิกขวาที่ไฟล์ ```docker-compose.yml``` เลือก [**Compose Up**] ขึ้นไปจะทำให้มีการสร้างตัว container ,network มีการบันทึกข้อมูลตามที่กำหนดไว้ในแต่ละตัวบน container, port ที่ถูกระบุใช้งาน หรือชื่อโดเมนที่มีการใช้ traefik ช่วยในการจัดการตามที่เรากำหนด
