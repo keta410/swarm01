@@ -168,7 +168,7 @@ ______________________________________________________
 
 3. Code for APP (Code สำหรับ APP)  
 
-<details><summary>CLICK SHOW CODE (docker-compose.yml)</summary>
+<details><summary><ins>CLICK SHOW CODE (docker-compose.yml)</ins></summary>
 <p>
 
 ```ruby 
