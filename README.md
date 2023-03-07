@@ -5,12 +5,12 @@
 **Wakatime Project: swarm01**=> https://wakatime.com/@spcn22/projects/gtauhbzafe
 
 **Ref** :
-- App [*wordpress-mysql*] , I want deploy on portainer (App ที่ต้องการ deploy บน portainer)
+- **App [*wordpress-mysql*] , I want deploy on portainer** (App ที่ต้องการ deploy บน portainer)
 
 >(https://github.com/docker/awesome-compose/tree/master/wordpress-mysql)
 
 
-* The Example for code about traefik (ตัวอย่าง code เกี่ยวกับ traefik)
+* **The Example for code about traefik** (ตัวอย่าง code เกี่ยวกับ traefik)
 
 >(https://github.com/pitimon/dockerswarm-inhoure/blob/main/ep04-hello-world-revProxy/hello-world-https.yml) 
 
@@ -31,35 +31,35 @@ ______________________________________________________
 ## **Prepare Device** (personal computer, notebook)
 เตรียมพร้อมอุปกรณ์ (คอมพิวเตอร์, โน๊ตบุ๊คส่วนตัว)
 ______________________________________________________
-1. Create **VM** on proxmox then set timezone etc. 
-(สร้าง **VM** บน proxmox จากนั้นตั้งค่า timezone เป็นต้น)
+1. **Create VM on proxmox then set timezone etc.** 
+(สร้าง VM บน proxmox จากนั้นตั้งค่า timezone เป็นต้น)
 
-    <ins>Form command</ins> :
+    **<ins>Form command</ins>** :
 
     ```linux
     timedatectl set-timezone Asia/Bangkok   
     ```
 
-2. Check the **IP address** of **VM** created (I created a VM named : keta-Docker-115) and copy the IP address.
+2. **Check the *IP address* of *VM* created (I created a VM named : keta-Docker-115) and copy the IP address.**
 
-    (ตรวจสอบ **IP address** จาก VM ที่สร้าง (ในที่นี้สร้าง **VM** ชื่อ : keta-Docker-115))
+    (ตรวจสอบ *IP address* จาก VM ที่สร้าง (ในที่นี้สร้าง *VM* ชื่อ : keta-Docker-115))
 
-    <ins>Form command</ins> :
+    **<ins>Form command</ins>** :
     
     ```linux
     ip a
     ```
-3. Click in the bottom-left cornor of the window named [**Open Remote Window**] and this will appear
+3. **Click in the bottom-left cornor of the window named [*Open Remote Window*] and this will appear.**
 
     (คลิกปุ่มด้านล่างซ้ายสุดของหน้าต่าง ชื่อว่า [**Open Remote Window**] และจะปรากฏสิ่งนี้)
 
     ![config-host1](https://user-images.githubusercontent.com/104758471/222904598-4065cc30-cc6e-457d-84c5-b3bd852f0bfc.jpg)
 
-4. Click [**Connect to Host...**] > [**Configure SSH Hosts..**] > [**C:\Users\asus\.ssh\config**] then configure as follows 
+4. **Click [*Connect to Host...*] > [*Configure SSH Hosts..*] > [*C:\Users\asus\.ssh\config*] then configure as follows.** 
 
-    (คลิก [**Connect to Host...**] > [**Configure SSH Hosts..**] > [**C:\Users\asus\.ssh\config**] จากนั้นกำหนดค่าตามนี้)
+    (คลิก [*Connect to Host...*] > [*Configure SSH Hosts..*] > [*C:\Users\asus\.ssh\config*] จากนั้นกำหนดค่าตามนี้)
 
-<ins>Form config</ins>:
+**<ins>Form config</ins>** :
 
     ```
     Host (name's host)          //you set on personal computer
@@ -71,14 +71,14 @@ ______________________________________________________
     
     ```
 
-5. Install **Docker, wakatime** and **ssh remote** at the computer used on VS Code then remote own VM from proxmox with the IP address, I coppied.
+5. **Install *Docker, wakatime* and *ssh remote* at the computer used on VS Code then remote own VM from proxmox with the IP address, I coppied.**
     
-    (ติดตั้ง **Docker, wakatime** และ **ssh remote** ที่เครื่องคอมพิวเตอร์ที่ใช้งานผ่าน VS Code จากนั้น remote VM ของตัวเองจาก proxmox ด้วย IP adress ที่ copy มา)
+    (ติดตั้ง *Docker, wakatime* และ *ssh remote* ที่เครื่องคอมพิวเตอร์ที่ใช้งานผ่าน VS Code จากนั้น remote VM ของตัวเองจาก proxmox ด้วย IP adress ที่ copy มา)
 
     * Docker engine install on ubutu
         (การติตดั้ง Docker engine บน ubutu)
 
-     <ins>Form command</ins> :
+     **<ins>Form command</ins>** :
     ```linux
     apt update ; apt upgrade -y
     apt-get install \
@@ -101,15 +101,15 @@ ______________________________________________________
     apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
     ```    
 
-    When finished in the VM, right click to [**Convert to template**] and clone it out.
+    **When finished in the VM, right click to [*Convert to template*] and clone it out.**
 
     (เมื่อลงใน VM เสร็จแล้ว ให้ทำเป็น Template โดยคลิกขวาเลือก [**Convert to template**] แล้ว clone ออกมา)
 
-6. Set work specification that has already been defined, All three clones were named : ket-manager-190, ket-worker1-191, ket-worker2-192
+6. **Set work specification that has already been defined, All three clones were named : ket-manager-190, ket-worker1-191, ket-worker2-192.**
 
     (กำหนดสเปคการทำงานที่กำหนดไว้ จากนั้นตั้งชื่อตัวที่ clone ทั้งหมด 3 เครื่อง ได้แก่ ket-manager-190, ket-worker1-191, ket-worker2-192)
 
-7. In No.6, All clones, change hostname, set timezone and remove machine-id from master machine. Install wakatime extension and ssh remote on all clone machine 
+7. **In No.6, All clones, change hostname, set timezone and remove machine-id from master machine. Install wakatime extension and ssh remote on all clone machine.** 
 
     (จากข้อ 6. ตัวที่ clone ทั้งหมด ให้ทำการเปลี่ยนชื่อ hostname, ตั้งค่า timezone และลบ machine-id จากเครื่องที่เป็น master ออก จากนั้นติดตั้ง Extensions ของ wakatime และ ssh remote ลงบนเครื่องที่ clone ทุกตัว) 
 
@@ -119,9 +119,7 @@ ______________________________________________________
     hostnamectl set-hostname [set name]
     timedatectl set-timezone Asia/Bangkok
     ```
-* Edit *machine-id* in clone
-    
-    แก้ไข *machine-id* ในตัว clone 
+* Edit *machine-id* in clone (แก้ไข *machine-id* ในตัว clone) 
     ```linux
     cp /dev/null /etc/machine-id
     rm /var/lib/dbus/machine-id
@@ -129,15 +127,15 @@ ______________________________________________________
     init 0
     ```
 
-8. Assign Docker permissions to the user on the clone machine
+8. **Assign Docker permissions to the user on the clone machine.**
 
-    กำหนดสิทธิ์การใช้งาน Docker ให้กับ user บนเครื่องที่ clone ออกมา
+    (กำหนดสิทธิ์การใช้งาน Docker ให้กับ user บนเครื่องที่ clone ออกมา)
 ```shell
 sudo usermod -aG docker $USER       //USER บัญชีที่เราไว้ login บนเครื่อง 
 docker ps                           //เป็นการเช็คว่า user สามารถเข้าใช้งาน docker ได้
 ```
 
-9. Create **Docker Swarm** on the manager machine using command ```docker swarm init``` and it will show a token, copy the manager machine token and run it on 2 worker machines
+9. **Create **Docker Swarm** on the manager machine using command ```docker swarm init``` and it will show a token, copy the manager machine token and run it on 2 worker machines.**
 
     สร้าง **Docker Swarm** บนเครื่องชื่อ manager โดยใช้คำสั่ง ```docker swarm init``` แล้วมันจะแสดง token ให้ copy token ของเครื่อง manager ไป run บนเครื่องที่เป็น worker 2 เครื่องที่เหลือ
 
@@ -155,12 +153,11 @@ ______________________________________________________
 ขั้นตอนที่ 1 สร้าง Folder และ File สำหรับ APP
 ______________________________________________________
 
-1. Create Folder Name's => **wordpress-mysql**
-    
-    สร้าง Folder ชื่อ => **wordpress-mysql**
-2. Create File in folder => *wordpress-mysql* (สร้าง File ใน folder ชื่อ => *wordpress-mysql*) 
+1. **Create Folder Name's => *wordpress-mysql*** (สร้าง Folder ชื่อ => *wordpress-mysql*)
 
-    <ins>Stucture of *wordpress-mysql* folder</ins> :
+2. **Create File in folder => *wordpress-mysql*** (สร้าง File ใน folder ชื่อ => *wordpress-mysql*) 
+
+    **<ins>Stucture of *wordpress-mysql* folder</ins>** :
     
     โครงสร้างของ folder *wordpress-mysql* : 
     ```
@@ -174,7 +171,7 @@ ______________________________________________________
 <details><summary>CLICK SHOW CODE (docker-compose.yml)</summary>
 <p>
 
-```docker 
+```ruby 
 version: '3.8'      #Version Docker
 services:
     db:         #Data
@@ -258,28 +255,29 @@ networks:       #All network, can used
 
 </p>
 </details>
+
 ______________________________________________________
 
 ### **Step 2** Deploy on Portainer(.xops.ipv9.me)
 ขั้นตอนที่ 2 การ Deploy ขึ้นบน Portainer(.xops.ipv9.me)
 ______________________________________________________
 
-1. Open website =>(https://portainer.ipv9.me/#!/auth) and Login with GitHub account
+1. **Open website =>(https://portainer.ipv9.me/#!/auth) and Login with GitHub account**
 
     เปิด website =>(https://portainer.ipv9.me/#!/auth) และ Login with GitHub account
 
-2. Press [**Add Stack**] and click [**Web editor**]
+2. **Press [*Add Stack*] and click [*Web editor*]**
 
-    กดปุ่ม  [**Add Stack**] และคลิก [**Web editor**]
+    กดปุ่ม  [*Add Stack*] และคลิก [*Web editor*]
 
 * Add Stack
 ![up-portainer-fillText jpg ](https://user-images.githubusercontent.com/104758471/222903882-8aa8a92d-63bc-4dc4-8615-0070078cd863.jpg)
 
 * Web Editor
 ![up-portainer-wp-mysql-fillText jpg ](https://user-images.githubusercontent.com/104758471/222903804-43174bd9-3608-4865-85d4-1f2121bf627a.jpg)
-3. Copy the code in the file docker-compose.yml and press [**Deploy the stack**] 
+3. **Copy the code in the file docker-compose.yml and press [*Deploy the stack*]** 
     
-    Copy code ในไฟล์ docker-compose.yml และกด [**Deploy the stack**]
+    Copy code ในไฟล์ docker-compose.yml และกด [*Deploy the stack*]
     
      
 ______________________________________________________
@@ -288,15 +286,11 @@ ______________________________________________________
 ผลลัพธ์ที่คาดว่าจะได้รับ
 ______________________________________________________
 
-* After add stack
-
-    หลัง add stack
+* After add stack (หลัง add stack)
 
 ![up-portainer-wp-mysql-complete jpg ](https://user-images.githubusercontent.com/104758471/222713931-b48cef9c-fbf7-455c-97ae-a168718d0f17.jpg)
 
-* Web browsers, I configure can access WordPress
-
-    เว็บเบราว์เซอร์ที่เรากำหนดให้สามารถเข้าถึง WordPress ได้
+* Web browsers, I configure can access Wordpress (เว็บเบราว์เซอร์ที่เรากำหนดให้สามารถเข้าถึง Wordpress ได้)
 
 ![access-web-wp-mysql](https://user-images.githubusercontent.com/104758471/222714145-31addf7d-4858-495d-934a-212e289700e1.jpg)
 
@@ -308,7 +302,7 @@ ______________________________________________________
     
 **<ins>Under the ```docker-compose.yml``` of the app [*wordpress-mysql*] is specified</ins>** :
 
-ภายใต้การทำงานของ ```docker-compose.yml``` ของ app [*wordpress-mysql*] มีการระบุ
+(ภายใต้การทำงานของ ```docker-compose.yml``` ของ app [*wordpress-mysql*] มีการระบุ)
 
 - **Version** of the compose file directly, it can specify any version that is supported by the app I choose, in this case I choose 3.8
 
@@ -331,6 +325,6 @@ consists of image, command, volumes, restart, networks, environment, expose and 
 
 When command ```docker compose up -d``` or Click right the ```docker-compose.yml``` file, then select [**Compose Up**]. this will cause the container to be created, the network will record the data specified for each on the container, the port that is specified or a domain name that uses traefik to help manage as we define.
 
-(**<ins>สรุป</ins>**
+**<ins>สรุป</ins>**
 
-เมื่อสั่ง ```docker compose up -d``` หรือคลิกขวาที่ไฟล์ ```docker-compose.yml``` เลือก [**Compose Up**] ขึ้นไปจะทำให้มีการสร้างตัว container ,network มีการบันทึกข้อมูลตามที่กำหนดไว้ในแต่ละตัวบน container, port ที่ถูกระบุใช้งาน หรือชื่อโดเมนที่มีการใช้ traefik ช่วยในการจัดการตามที่เรากำหนด)
+(เมื่อสั่ง ```docker compose up -d``` หรือคลิกขวาที่ไฟล์ ```docker-compose.yml``` เลือก [**Compose Up**] ขึ้นไปจะทำให้มีการสร้างตัว container ,network มีการบันทึกข้อมูลตามที่กำหนดไว้ในแต่ละตัวบน container, port ที่ถูกระบุใช้งาน หรือชื่อโดเมนที่มีการใช้ traefik ช่วยในการจัดการตามที่เรากำหนด)
